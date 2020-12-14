@@ -1,0 +1,129 @@
+// sdf
+syntax = "proto3";
+
+package soter;
+
+enum UpdateType {
+  NO_OP = 0;
+  RESOURCE_NEEDED = 1;
+  RESOURCE_NO_LONGER_NEEDED = 2;
+  RESOURCE_ACQUIRED = 3;
+  RESOURCE_RELEASED = 4;
+}
+
+service SoterService {
+  rpc createTask(CreateTaskRequest) returns (CreateTaskResponse);
+  rpc exitTask(ExitTaskRequest) returns (ExitTaskResponse);
+  rpc cancelTask(CancelTaskRequest) returns (CancelTaskResponse);
+  rpc abnormalExitTask(AbnormalExitTaskRequest) returns (AbnormalExitTaskResponse);
+  rpc yieldTask(YieldTaskRequest) returns (YieldTaskResponse);
+  rpc blockTask(BlockTaskRequest) returns (BlockTaskResponse);
+  rpc startTask(StartTaskRequest) returns (StartTaskResponse);
+  rpc updateState(UpdateStateRequest) returns (UpdateStateResponse);
+  rpc nondeterministicBooleanChoice(NondeterministicBooleanChoiceRequest) returns (NondeterministicBooleanChoiceResponse);
+  rpc nondeterministicIntegerChoice(NondeterministicIntegerChoiceRequest) returns (NondeterministicIntegerChoiceResponse);
+  rpc nondeterministicIntegerWithBoundChoice(NondeterministicIntegerWithBoundChoiceRequest) returns (NondeterministicIntegerWithBoundChoiceResponse);
+}
+
+message CreateTaskRequest {
+  string id = 1;
+}
+
+message CreateTaskResponse { }
+
+message ExitTaskRequest {
+  string id = 1;
+}
+
+message ExitTaskResponse { }
+
+message CancelTaskRequest {
+  string id = 1;
+}
+
+message CancelTaskResponse { }
+
+message AbnormalExitTaskRequest {
+  string id = 1;
+}
+
+message AbnormalExitTaskResponse { }
+
+message YieldTaskRequest {
+  string id = 1;
+  UpdateType updateType = 2;
+  string resourceId = 3;
+}
+
+message YieldTaskResponse { }
+
+message BlockTaskRequest {
+  string id = 1;
+}
+
+message BlockTaskResponse { }
+
+message StartTaskRequest {
+  string id = 1;
+}
+
+message StartTaskResponse { }
+
+message UpdateStateRequest {
+  string id = 1;
+  UpdateType updateType = 2;
+  string resourceId = 3;
+}
+
+message NondeterministicBooleanChoiceRequest { }
+
+message NondeterministicBooleanChoiceResponse {
+  bool result = 1;
+}
+
+message NondeterministicIntegerChoiceRequest { }
+
+message NondeterministicIntegerChoiceResponse {
+  int32 result = 1;
+}
+
+message NondeterministicIntegerWithBoundChoiceRequest { 
+  int32 bound = 1;
+}
+
+message NondeterministicIntegerWithBoundChoiceResponse {
+  int32 result = 1;
+}
+
+message UpdateStateResponse { }
+
+service SoterClientService {
+  rpc isAvailableFor(IsAvailableForRequest) returns (IsAvailableForResponse);
+  rpc hasAssociatedTask(HasAssociatedTaskRequest) returns (HasAssociatedTaskResponse);
+  rpc getAssociatedTask(GetAssociatedTaskRequest) returns (GetAssociatedTaskResponse);
+}
+
+message IsAvailableForRequest {
+  string taskId = 1;
+  string resourceId = 2;
+}
+
+message IsAvailableForResponse { 
+  bool result = 1;
+}
+
+message HasAssociatedTaskRequest {
+  string resourceId = 1;
+}
+
+message HasAssociatedTaskResponse {
+  bool result = 1;
+}
+
+message GetAssociatedTaskRequest {
+  string resourceId = 1;
+}
+
+message GetAssociatedTaskResponse {
+  string taskId = 1;
+}

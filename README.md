@@ -1,11 +1,9 @@
-## My Project
+## Soter
+Soter is a stateless model checker for Java. For more details, we refer the readers to Documentation.
 
-TODO: Fill this README out!
+Run `mkdocs serve` and browse to `http://127.0.0.1:8000/` to see the documentation.
 
-Be sure to:
-
-* Change the title in this README
-* Edit your repository description on GitHub
+If you don't have mkdocs installed, you can install by running `pip install mkdocs` or `pip3 install mkdocs` depending on the version of Python you are using.
 
 ## Security
 

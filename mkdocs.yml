@@ -1,0 +1,17 @@
+site_name: Soter
+use_directory_urls: false
+nav:
+  - Home: index.md
+  - "Using Soter":
+    - Building: building.md
+    - Running: running.md
+    - "Tutorial: Testing a Java Program": java.md
+    - Search Types: search.md
+  - "Language Clients":
+    - Python: python.md
+    - Rust: rust.md
+  - "Developing":
+    - Server Interface: server.md
+    - Client Interface: client.md
+    - Communication Overhead: overhead.md
+theme: readthedocs
