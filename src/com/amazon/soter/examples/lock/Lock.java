@@ -1,3 +1,6 @@
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 package com.amazon.soter.examples.lock;
 
 import com.amazon.soter.java.util.concurrent.ForkJoinPool;

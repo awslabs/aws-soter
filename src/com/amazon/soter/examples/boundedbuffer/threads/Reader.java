@@ -1,3 +1,6 @@
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 package com.amazon.soter.examples.boundedbuffer.threads;
 
 import com.amazon.soter.examples.boundedbuffer.BoundedBuffer;
