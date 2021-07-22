@@ -16,7 +16,6 @@ import com.amazon.soter.checker.tasks.Task;
 import com.amazon.soter.checker.tasks.TaskExecutionModel;
 import com.amazon.soter.checker.tasks.TaskId;
 import com.amazon.soter.checker.trace.ScheduleTrace;
-import com.amazon.soter.service.SoterServerGrpc;
 
 import com.amazon.soter.checker.exceptions.CounterexampleFoundException;
 import com.amazon.soter.checker.exceptions.DeadlockDetectedException;
@@ -78,9 +77,6 @@ public abstract class Searcher<T> implements Search {
 
     /** Have we started the servers yet? */
     private boolean serverStarted = false;
-
-    /** gRPC server instance. */
-    private SoterServerGrpc soterServerGrpc;
 
     /**
      * Make a new Searcher instance without max depth per iteration.
@@ -322,12 +318,7 @@ public abstract class Searcher<T> implements Search {
 
     private void shutdownServer() {
         if (serverStarted) {
-            try {
-                soterServerGrpc.stop();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                logger.severe("Failed to stop the gRPC server.");
-            }
+
         }
     }
 
@@ -367,28 +358,9 @@ public abstract class Searcher<T> implements Search {
                         checker.abnormalExitTask(searchConfiguration.getExitOp());
                     }
 
-                } else if (target.getExecutionType() == TargetExecutionType.External) {
-                    if (!serverStarted) {
-                        /* Start the Soter GRPC server. */
-                        soterServerGrpc = new SoterServerGrpc();
-                        try {
-                            soterServerGrpc.start();
-                            serverStarted = true;
-                        } catch (Exception ie) {
-                            ie.printStackTrace();
-                            throw new InternalSystemFailureException();
-                        }
-                    }
+                }
+                else if (target.getExecutionType() == TargetExecutionType.External) {
 
-                    try {
-                        /* Yield the main/root program immediately, wait for checker to start it.  */
-                        checker.yield(searchConfiguration.getInitOp());
-                        target.run(checker);
-                        checker.exitTask(searchConfiguration.getExitOp());
-                    } catch (Throwable e) {
-                        e.printStackTrace();
-                        checker.abnormalExitTask(searchConfiguration.getExitOp());
-                    }
 
                 } else {
                     throw new InvalidExecutionTypeException();
