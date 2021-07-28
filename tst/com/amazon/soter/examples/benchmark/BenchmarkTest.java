@@ -34,7 +34,7 @@ public class BenchmarkTest {
         System.out.println("---");
     }
 
-    @Test
+    //@Test
     public void benchmarkTest() {
         TestingTarget dfsTestingTarget = new LambdaTestingTarget((x) -> {
             Benchmark p = new Benchmark();
