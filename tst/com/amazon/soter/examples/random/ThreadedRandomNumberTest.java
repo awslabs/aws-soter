@@ -10,7 +10,7 @@ import com.amazon.soter.checker.support.SoterCheckRunner;
 
 import org.junit.runner.RunWith;
 
-@RunWith(SoterCheckRunner.class)
+//@RunWith(SoterCheckRunner.class)
 public class ThreadedRandomNumberTest {
     @SoterCheck(search = SearchType.DFS, strategy = StrategyType.RandomStrategy, maxDepth = 10000, errorDepth = 1000, maxIterations = -1, expected = RuntimeException.class)
     public void threadedRandomNumberTest() {
